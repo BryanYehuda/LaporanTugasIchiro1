@@ -1,2 +1,2 @@
-# LaporanTugasIchiro1-
-Laporan Penugasa Pertama dari Ichiro
+# LaporanTugasIchiro1
+Laporan Penugasan Ichiro Pertama
