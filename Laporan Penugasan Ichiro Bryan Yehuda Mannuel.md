@@ -889,3 +889,165 @@ rosrun beginner_tutorials listener
 5. Amati bahwa _talker_ dan _listener_ saling bertukar messages satu sama lain
 (**Selesai pada 11 November 2019, jam 22.37**)            
 
+#### 14. Membuat Service dan Client dalam c++
+1. Masuk ke direktori beginner_tutorials dengan command :
+```
+roscd beginner_tutorials
+```
+(**Selesai pada 12 November 2019, jam 19.45**)
+
+2. Buat file src/add_two_ints_server.cpp yang berisi :
+```    
+#include "ros/ros.h"
+#include "beginner_tutorials/AddTwoInts.h"
+bool add(beginner_tutorials::AddTwoInts::Request  &req,
+ beginner_tutorials::AddTwoInts::Response &res)
+{
+ res.sum = req.a + req.b;
+ ROS_INFO("request: x=%ld, y=%ld", (long int)req.a, (long int)req.b);
+ ROS_INFO("sending back response: [%ld]", (long int)res.sum);
+ return true;
+}
+int main(int argc, char **argv)
+{
+ ros::init(argc, argv, "add_two_ints_server");
+ ros::NodeHandle n;
+ ros::ServiceServer service = n.advertiseService("add_two_ints", add);
+ ROS_INFO("Ready to add two ints.");
+ ros::spin();
+ return 0;
+}
+```
+(**Selesai pada 12 November 2019, jam 19.50**)
+
+3.  Buat file src/add_two_ints_client.cpp yang berisi :
+ ```
+ #include "ros/ros.h"
+#include "beginner_tutorials/AddTwoInts.h"
+#include <cstdlib>
+int main(int argc, char **argv)
+{
+ ros::init(argc, argv, "add_two_ints_client");
+ if (argc != 3)
+ {
+ ROS_INFO("usage: add_two_ints_client X Y");
+ return 1;
+ }
+ ros::NodeHandle n;
+ ros::ServiceClient client = n.serviceClient<beginner_tutorials::AddTwoInts>("add_two_ints");
+ beginner_tutorials::AddTwoInts srv;
+ srv.request.a = atoll(argv[1]);
+ srv.request.b = atoll(argv[2]);
+ if (client.call(srv))
+ {
+ ROS_INFO("Sum: %ld", (long int)srv.response.sum);
+ }
+ else
+ {
+ ROS_ERROR("Failed to call service add_two_ints");
+ return 1;
+ }
+ return 0;
+}
+```
+(**Selesai pada 12 November 2019, jam 20.00**)
+
+4. Edit file CMakeLists.txt dan tambahkan line berikut :
+```
+add_executable(add_two_ints_server src/add_two_ints_server.cpp)
+target_link_libraries(add_two_ints_server ${catkin_LIBRARIES})
+add_dependencies(add_two_ints_server beginner_tutorials_gencpp)
+add_executable(add_two_ints_client src/add_two_ints_client.cpp)
+target_link_libraries(add_two_ints_client ${catkin_LIBRARIES})
+add_dependencies(add_two_ints_client beginner_tutorials_gencpp)
+```
+(**Selesai pada 12 November 2019, jam 20.10**)
+
+5. Lalu, jalankan _catkin_make_ dengan command:
+ ```
+ cd ~/catkin_ws
+catkin_make
+``` 
+(**Selesai pada 12 November 2019, jam 20.13**)
+
+6. Jalankan `roscore`
+(**Selesai pada 12 November 2019, jam 20.14**)         
+7. Jalankan  add_two_ints_server.cpp dengan command :
+```
+rosrun beginner_tutorials add_two_ints_server
+```
+(**Selesai pada 12 November 2019, jam 20.15**)
+    
+8. Jalankan  add_two_ints_client.cpp dengan command :
+```
+rosrun beginner_tutorials add_two_ints_client 1 3
+```
+(**Selesai pada 12 November 2019, jam 20.16**)
+
+#### 16. Menjalankan Service dan Client dalam c++
+1. Jalankan `roscore`
+(**Selesai pada 12 November 2019, jam 20.17**)        
+2. Jangan lupa melakukan sourcing pada file setup dengan command :
+```
+cd ~/catkin_ws
+source ./devel/setup.bash
+```
+(**Selesai pada 12 November 2019, jam 20.18**)       
+  
+3. Jalankan  add_two_ints_server.cpp dengan command :
+```
+rosrun beginner_tutorials add_two_ints_server
+```
+(**Selesai pada 12 November 2019, jam 20.19**)
+    
+4. Jalankan  add_two_ints_client.cpp dengan command :
+```
+rosrun beginner_tutorials add_two_ints_client 1 3
+```
+(**Selesai pada 12 November 2019, jam 20.20**) 
+  
+5. Amati add_two_ints_server.cpp dan   add_two_ints_client.cpp saling berinteraksi
+(**Selesai pada 12 November 2019, jam 20.22**)      
+
+#### 17. Cara Record dan Playback Data
+
+1. Jalankan ` roscore`
+(**Selesai pada 12 November 2019, jam 20.23**)
+2. Jalankan `rosrun turtlesim turtlesim_node`
+(**Selesai pada 12 November 2019, jam 20.24**)
+3. Jalankan `rosrun turtlesim turtle_teleop_key`
+(**Selesai pada 12 November 2019, jam 20.25**)
+4. Jalankan `rostopic list -v`
+(**Selesai pada 12 November 2019, jam 20.26**)
+5. Kita sekarang akan melakukan Record data dengan menjalankan command berikut :
+```
+mkdir ~/bagfiles
+cd ~/bagfiles
+rosbag record -a
+```
+(**Selesai pada 12 November 2019, jam 20.28**)
+
+6.  Untuk melihat data jalankan command berikut di dalam direktori bagfiles
+```
+rosbag info <your bagfile>
+```
+(**Selesai pada 12 November 2019, jam 20.29**)
+
+#### 18. Debugging dengan roswtf
+
+1. Kita bisa menggunakan command `roswtf` untuk mencari masalah apakah yang ada pada sistem _ROS_ kita
+2. Contoh penggunaan adalah dengan :
+```
+roscd rosmaster
+roswtf
+```
+(**Selesai pada 12 November 2019, jam 20.31**)
+
+#### 19. Cara Menavigasi Wiki
+
+1. Cukup Tahu
+(**Selesai pada 12 November 2019, jam 20.35**)
+2. ROS Tutorial Selesai
+(**Selesai pada 12 November 2019, jam 20.35**)
+
+
