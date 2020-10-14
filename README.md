@@ -1,5 +1,8 @@
-# LaporanTugasIchiro1
-Laporan Penugasan Ichiro Pertama
+# Laporan Tugas Ichiro 1
+**Laporan dari penugasan Ichiro pertama**
 
-Laporan lengkap ada di Laporan Penugasan Ichiro Bryan Yehuda Mannuel.md  
-Semua isi dari direktori _catkin_ws_ sudah di ekstrak dalam bentuk .Rar
+### Penugasan kedua ini kita harus melakukan instalasi terhadap Linux Ubuntu, ROS Melodic, dan mengerjakan tutorial ROS
+-Laporan lengkap ada di Laporan Penugasan Ichiro Bryan Yehuda Mannuel.md  
+-Semua isi dari direktori build sudah dimasukkan ke dalam repository  
+-Semua isi dari direktori devel sudah dimasukkan ke dalam repository
+-Semua isi dari direktori src sudah dimasukkan ke dalam repository
