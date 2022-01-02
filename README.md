@@ -1,5 +1,5 @@
 # Laporan Tugas Ichiro 1
-**Laporan dari penugasan Ichiro pertama**
+**Laporan penugasan Ichiro pertama**
 
 ### Penugasan kedua ini kita harus melakukan instalasi terhadap Linux Ubuntu, ROS Melodic, dan mengerjakan tutorial ROS
 -Laporan lengkap ada di Laporan Penugasan Ichiro Bryan Yehuda Mannuel.md  
